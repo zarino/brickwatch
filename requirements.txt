@@ -1,3 +1,5 @@
 django
 ebaysdk
+lxml
 MySQL-python
+requests

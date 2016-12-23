@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^market/', include('market.urls')),
+    url(r'^catalog/', include('catalog.urls')),
     url(r'^admin/', admin.site.urls),
 ]
