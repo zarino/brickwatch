@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible
@@ -43,3 +44,7 @@ class Listing(models.Model):
 
     def __str__(self):
         return '{} {}'.format(self.listing_id, self.title)
+
+    @property
+    def is_active(self):
+        return self.end_time > timezone.now()

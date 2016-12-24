@@ -5,7 +5,7 @@ from market.models import Listing
 def current_price(listing):
     return '{} {}'.format(
         listing.current_price,
-        listing.current_price_currency
+        listing.current_price_currency,
     )
 
 @admin.register(Listing)
@@ -16,5 +16,17 @@ class ListingAdmin(admin.ModelAdmin):
         current_price,
         'start_time',
         'end_time',
+        'is_active',
     )
+
     ordering = ('-end_time',)
+
+    list_display_links = (
+        'listing_id',
+        'title',
+    )
+
+    list_filter = (
+        'sale_type',
+        'condition',
+    )
