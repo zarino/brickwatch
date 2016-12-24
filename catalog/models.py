@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible
-class Set(models.Model):
+class CatalogSet(models.Model):
     set_number = models.CharField(max_length=8, primary_key=True)
     name = models.CharField(max_length=128)
     year = models.IntegerField(default=0, null=True)
@@ -17,7 +17,10 @@ class Set(models.Model):
     rrp_eur = models.DecimalField('EU RRP (€)', max_digits=6, decimal_places=2, null=True)
 
     def __str__(self):
-        return '{} {}'.format(self.set_number, self.name)
+        return '{} {}'.format(
+            self.set_number,
+            self.name,
+        )
 
     def admin_thumbnail(self):
         return '<img src="{}" width="100" style="height: auto" />'.format(

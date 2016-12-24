@@ -11,7 +11,7 @@ import pprint
 import re
 import requests
 
-from catalog.models import Set
+from catalog.models import CatalogSet
 
 # Set up prettyprinter for debugging
 pp = pprint.PrettyPrinter(indent=2)
@@ -120,7 +120,7 @@ class Command(BaseCommand):
             # global pp
             # pp.pprint(set_details)
 
-            s = Set(**set_details)
+            s = CatalogSet(**set_details)
             s.save()
             self.stdout.write(self.style.SUCCESS(
                 'Saved set {} {}'.format(
