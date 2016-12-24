@@ -16,8 +16,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from brickwatch import views
+
 urlpatterns = [
     url(r'^market/', include('market.urls')),
     url(r'^catalog/', include('catalog.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^$', views.index),
 ]
