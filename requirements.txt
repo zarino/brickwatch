@@ -3,3 +3,4 @@ ebaysdk
 lxml
 MySQL-python
 requests
+django-stronghold

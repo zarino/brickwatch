@@ -32,12 +32,15 @@ ALLOWED_HOSTS = [ ]
 INSTALLED_APPS = [
     'market.apps.MarketConfig',
     'catalog.apps.CatalogConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'stronghold',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +51,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # The Stronghold module doesn't support django 1.10's new-style
+    # middleware format, so we point to our own 1.10-style adapter.
+    # https://github.com/mgrouchy/django-stronghold/issues/57
+    'brickwatch.middleware.LoginRequiredStrongholdMiddleware',
 ]
 
 ROOT_URLCONF = 'brickwatch.urls'
