@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^market/', include('market.urls')),
     url(r'^catalog/', include('catalog.urls')),
     url(r'^admin/', admin.site.urls),
-    # url(r'^', include('django.contrib.auth.urls')),
+    # https://docs.djangoproject.com/en/1.10/topics/auth/default/#using-the-views
+    url(r'^', include('django.contrib.auth.urls')),
     url(r'^$', views.index),
 ]
