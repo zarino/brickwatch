@@ -119,6 +119,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# The Django development server will serve files from directories listed here.
+# This doesn't do anything in production, where static files should be served
+# from STATIC_ROOT by your webserver (eg: Apache).
+# https://docs.djangoproject.com/en/1.10/ref/settings/#std:setting-STATICFILES_DIRS
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
 LOGIN_REDIRECT_URL = '/'

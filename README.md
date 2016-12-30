@@ -36,6 +36,12 @@ Assuming a directory structure as above:
 
 Then edit `brickwatch/local_settings.py` to include your ebay and brickset API credentials, and any other environment-specific changes you require.
 
+For local development, you will want to compile the Sass files at `/static/sass` to CSS at `/static/css`:
+
+    (env)$ sass --watch static/sass:static/css
+
+(In production, you’ll want to compile the Sass files one-off, and then run `./manage.py collectstatic` to copy them into a directory that your webserver can serve up directly.)
+
 ## Run the site
 
     (env)$ ./manage.py runserver
