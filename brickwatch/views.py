@@ -3,4 +3,5 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Hello, world. This is the project index.")
+    context = {}
+    return render(request, 'brickwatch/index.html', context)

@@ -4,3 +4,4 @@ lxml
 MySQL-python
 requests
 django-stronghold
+django-widget-tweaks
