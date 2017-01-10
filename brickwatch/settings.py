@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [ ]
 INSTALLED_APPS = [
     'market.apps.MarketConfig',
     'catalog.apps.CatalogConfig',
+    'profile.apps.ProfileConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',

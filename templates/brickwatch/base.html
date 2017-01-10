@@ -24,10 +24,12 @@
                   {% if user.is_authenticated %}
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Hello <strong>{{ user.username }}</strong>
+                            Hello <strong>{{ user.profile.name|default:user.username }}</strong>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a href="{% url 'profile_edit' %}">Edit profile</a></li>
+                            <li role="separator" class="divider"></li>
                           {% if user.is_staff %}
                             <li><a href="{% url 'admin:index' %}">Django Admin</a></li>
                             <li role="separator" class="divider"></li>
@@ -43,6 +45,10 @@
         </div>
     </nav>
     <div class="container">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+
         {% block content %}
         {% endblock %}
     </div>

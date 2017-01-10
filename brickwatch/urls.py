@@ -22,6 +22,7 @@ from brickwatch import views
 urlpatterns = [
     url(r'^market/', include('market.urls')),
     url(r'^catalog/', include('catalog.urls')),
+    url(r'^profile/', include('profile.urls')),
     url(r'^admin/', admin.site.urls),
     # https://docs.djangoproject.com/en/1.10/topics/auth/default/#using-the-views
     url(r'^accounts/', include('django.contrib.auth.urls')),
