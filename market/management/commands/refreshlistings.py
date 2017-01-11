@@ -26,18 +26,15 @@ class Command(BaseCommand):
             help='username of the brickwatch user whose eBay watchlist you want to fetch',
         )
 
-    def get_ebay_token_for_user(self, username):
+    def get_user(self, username):
         try:
-            user = User.objects.get(username=username)
+            self.user = User.objects.get(username=username)
         except User.DoesNotExist:
             raise CommandError('There is no user with the username "{}"'.format(
                 username,
             ))
 
-        token = user.profile.ebay_token
-        if token:
-            self.ebay_token = token
-        else:
+        if not self.user.profile.ebay_token:
             raise CommandError('User "{}" has no ebay_token'.format(
                 username,
             ))
@@ -49,7 +46,7 @@ class Command(BaseCommand):
                 appid=settings.EBAY_APP_ID,
                 devid=settings.EBAY_DEV_ID,
                 certid=settings.EBAY_CERT_ID,
-                token=self.ebay_token,
+                token=self.user.profile.ebay_token,
             )
             response = api.execute(*args)
             return response.dict()
@@ -60,7 +57,7 @@ class Command(BaseCommand):
         # Set up prettyprinter for debugging
         pp = pprint.PrettyPrinter(indent=2)
 
-        self.get_ebay_token_for_user(options['username'][0])
+        self.get_user(options['username'][0])
 
         results = self.query('GetMyeBayBuying', {
             'WatchList': {
@@ -125,6 +122,8 @@ class Command(BaseCommand):
                 if 'StartPrice' in item:
                     listing_details['start_price'] = Decimal(item['StartPrice']['value'])
                     listing_details['start_price_currency'] = item['StartPrice']['_currencyID']
+
+                listing_details['brickset_user'] = self.user
 
                 # pp.pprint(listing_details)
 

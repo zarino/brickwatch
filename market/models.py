@@ -5,6 +5,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
+from django.contrib.auth.models import User
 from catalog.models import CatalogSet
 
 @python_2_unicode_compatible
@@ -44,10 +45,13 @@ class Listing(models.Model):
     buyitnow_price = models.DecimalField(max_digits=6, decimal_places=2, null=True)
     buyitnow_price_currency = models.CharField(max_length=3, null=True)
 
+    brickset_user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     def __str__(self):
         return '{} {}'.format(
             self.listing_id,
             self.title,
+            self.brickset_user
         )
 
     @property

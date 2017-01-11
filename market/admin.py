@@ -30,6 +30,7 @@ class ListingAdmin(admin.ModelAdmin):
         'start_time',
         'end_time',
         'is_active',
+        'brickset_user',
     )
 
     ordering = ('-end_time',)
@@ -42,6 +43,7 @@ class ListingAdmin(admin.ModelAdmin):
     list_filter = (
         'sale_type',
         'condition',
+        'brickset_user',
     )
 
     # https://docs.djangoproject.com/en/1.10/ref/contrib/admin/#working-with-many-to-many-intermediary-models
