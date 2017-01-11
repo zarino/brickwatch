@@ -16,7 +16,6 @@ DATABASES = {
 EBAY_APP_ID = '###'
 EBAY_DEV_ID = '###'
 EBAY_CERT_ID = '###'
-EBAY_TOKEN = '######'
 
 # Docs: http://brickset.com/tools/webservices/v2
 BRICKSET_API_KEY = '###'

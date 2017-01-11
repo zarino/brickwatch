@@ -13,9 +13,34 @@ from ebaysdk.exception import ConnectionError
 import pprint
 
 from market.models import Listing
+from django.contrib.auth.models import User
 
 class Command(BaseCommand):
     help = 'Fetches the latest watchlist ("MyeBayBuying") data from eBay'
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            'username',
+            nargs=1,
+            type=str,
+            help='username of the brickwatch user whose eBay watchlist you want to fetch',
+        )
+
+    def get_ebay_token_for_user(self, username):
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise CommandError('There is no user with the username "{}"'.format(
+                username,
+            ))
+
+        token = user.profile.ebay_token
+        if token:
+            self.ebay_token = token
+        else:
+            raise CommandError('User "{}" has no ebay_token'.format(
+                username,
+            ))
 
     def query(self, *args):
         try:
@@ -24,7 +49,7 @@ class Command(BaseCommand):
                 appid=settings.EBAY_APP_ID,
                 devid=settings.EBAY_DEV_ID,
                 certid=settings.EBAY_CERT_ID,
-                token=settings.EBAY_TOKEN,
+                token=self.ebay_token,
             )
             response = api.execute(*args)
             return response.dict()
@@ -34,6 +59,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # Set up prettyprinter for debugging
         pp = pprint.PrettyPrinter(indent=2)
+
+        self.get_ebay_token_for_user(options['username'][0])
 
         results = self.query('GetMyeBayBuying', {
             'WatchList': {
