@@ -20,7 +20,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from brickwatch import views
 
 urlpatterns = [
-    url(r'^market/', include('market.urls')),
+    url(r'^listings/', include('market.urls')),
     url(r'^catalog/', include('catalog.urls')),
     url(r'^profile/', include('profile.urls')),
     url(r'^admin/', admin.site.urls),

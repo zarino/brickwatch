@@ -1,6 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic import ListView
+
+from catalog.models import CatalogSet
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the catalog index.")
+class CatalogSets(ListView):
+    context_object_name = 'catalog_sets'
+
+    def get_queryset(self):
+        return CatalogSet.objects.all()

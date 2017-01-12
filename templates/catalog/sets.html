@@ -1,0 +1,13 @@
+{% extends "brickwatch/base.html" %}
+
+{% block content %}
+
+    <ul>
+      {% for catalog_set in catalog_sets %}
+        {% include 'catalog/_set.html' with catalog_set=catalog_set %}
+      {% empty %}
+        <li>No sets! Try running <code>./manage.py addtocatalog</code>.</li>
+      {% endfor %}
+    </ul>
+
+{% endblock %}

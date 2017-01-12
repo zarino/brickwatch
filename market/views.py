@@ -1,6 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic import ListView
+
+from market.models import Listing
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+class Listings(ListView):
+    context_object_name = 'listings'
+
+    def get_queryset(self):
+        return Listing.objects.filter(brickset_user=self.request.user)
